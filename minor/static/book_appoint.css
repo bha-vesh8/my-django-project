@@ -1,0 +1,128 @@
+*{
+    box-sizing: border-box;
+}
+.search{
+    height: 1rem;
+    width: 35rem;
+    border-radius: 50px;
+}
+.logo{
+    box-shadow: 0 10px 20px 10px;
+}
+.searchlogo
+{
+    position: relative;
+    right: 28px;
+    top: 14px;
+    font-size: larger;
+    cursor: pointer;
+}
+body{
+    background-color: rgb(233,242,255); 
+    font-family: 'Lexend Deca';font-size: 15px;
+    
+}
+ul{
+    list-style-type: none;
+}
+li{
+    list-style-type: none;
+}
+.headline{
+    font-family: 'Lexend Deca';
+    font-weight: bold;
+}
+.specialist{
+    color: #0E6BD7;
+    background-color:rgb(233,242,255) ;
+    border-radius: 50px;
+    padding: 5px;
+    display: flex;
+    width: 70%;
+    font-weight: bold;
+    bottom: 10px;
+}
+.age{
+    color: #0E6BD7;
+}
+.image{
+    border-radius: 3px;
+}
+.button {
+    background-color: white; 
+    color: #0E6BD7; 
+    border: 2px solid #0E6BD7;
+    padding: 10px;
+    position: relative;
+    bottom: 10px;
+    left: 15px;
+    width: 80%;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50px;
+  }
+  .button:hover{
+    background-color: #02023E;
+    color: white;
+    border-color: #0E6BD7;
+  }
+.address
+{
+    font-size: smaller;
+    color: gray;
+}
+.card {
+    display: flex;
+    flex-direction: column; /* Aligns content vertically */
+    justify-content: space-between; /* Ensures consistent spacing */
+    height: 100%; /* Makes cards stretch to the same height */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional for styling */
+    border-radius: 8px; /* Optional for rounded corners */
+  }
+  
+  .card-body {
+    flex-grow: 1; /* Allows the body to expand to fill the available space */
+  }
+  
+  .card-img-top {
+    max-height: 150px; /* Adjust as needed for your design */
+    overflow: hidden; /* Ensures images don’t overflow the card */
+  }
+  
+  .image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures consistent image presentation */
+  }
+  .card:hover{
+    border-color: #0E6BD7;
+  }
+.popup
+{
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.popup_container
+{
+    height: 400px;
+    width: 800px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+p{
+    display: block;
+    margin: 20px auto;
+}
+
+  
+  

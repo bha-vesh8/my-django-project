@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            boxShadow: {
+              "3xl": "0 0 15px black",
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Ambulance service</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ambulance.css'%}" />
+  </head>
+  <body>
+    <div class="contianer">
+      <!-- ==================== nav =================-->
+      <div
+        class="nav flex justify-end items-center h-12 gap-28 bg-[#02023E] text-white"
+      >
+        <h1 class = "text-3xl relative right-20">Ambulance Service</h1>
+        <a href="#">Home</a>
+        <a href="#About">About Us</a>
+        <a href="Contact">Contact Us</a>
+        <p><i class="mr-4 fa-solid fa-phone"></i>+91 93994 40137</p>
+        <p class="mr-9">
+          <i class="mr-4 fa-regular fa-envelope"></i>ramanib043@gmail.com
+        </p>
+      </div>
+      <!-- ================== main =====================-->
+      <div class="head flex justify-center mt-12 gap-28">
+        <img src="/static/img/ambulance logo.webp" class="h-24" alt="" />
+        <h2 class="head text-5xl font-semibold mt-2">
+          My Patient Ambulance Service
+        </h2>
+      </div>
+      <div class="ambulance flex text-white">
+        <img src="/static/img/ambulance.jpg" class="mt-16" alt="" />
+        <p class="square bg-[#02023E] flex justify-center items-center">
+          <span class="text">Efficient and Immediate Ambulance Service</span>
+          <button
+            class="bg-sky-300 text-white border-none outline-none p-5 text-xl" onclick= window.location.href="{% url 'book_ambulance' %}"
+          >
+            Track Now
+          </button>
+        </p>
+      </div>
+
+      <!-- =============== About Us ================ -->
+      <div id = "About" class="about mt-28 flex">
+        <div>
+          <h1 class="text-5xl ml-24">About Us</h1>
+          <p class="text-xl ml-10 mt-9">
+            We, My patient Ambulance Services, is a reputed ambulance provider.
+            We are comitted to provide excellent and critical care service in
+            emergencies. We are recognized for our passionate care. We feel
+            honoured and privileged that our preexisting clients have positive
+            feedback towards us.
+          </p>
+        </div>
+        <img src="/static/img/aboutambu.jpg" class="h-80 " alt="" />
+      </div>
+    </div>
+
+
+
+  </body>
+</html>

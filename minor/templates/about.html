@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>About Us</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'mypatient.css' %}">
+  </head>
+
+  <body>
+    <section class="p-12">
+      <div>
+        <h1 class="text-4xl font-bold text-[#02023E] flex justify-center" class="div" data-aos="fade-down" data-aos-duration="1000" data-aos-once="false">
+          About Us
+        </h1>
+      </div>
+      <div class="container flex mt-16">
+        <div class="div" data-aos="fade-right" data-aos-duration="1000" data-aos-once="false">
+          <div>
+            <h1 class="text-4xl font-semibold text-[#02023E]">Our Mission</h1>
+          </div>
+          <div class="font-semibold mt-6 w-8/12 flex text-justify">
+            <p class="leading-8">
+              To empower individuals with easy access to healthcare services,
+              ensuring a healthier and happier community,our connection with
+              doctors is spread all over so that we can provide help at every
+              corner,we work with the experienced and expert doctors and make
+              sure there is no compromise with your health,we ensure the safety
+              of your data and guarantee the complete privacy.
+            </p>
+          </div>
+        </div>
+        <div class="div" data-aos="zoom-out" data-aos-duration="1000" data-aos-once="false"><img src="/static/img/img2.jpg" class="group" alt="" /></div>
+      </div>
+
+      <div class="container flex mt-24">
+        <div class="div" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="false"><img src="/static/img/mypatient_image.jpg" id="img" /></div>
+        <div class="div" data-aos="fade-left" data-aos-duration="1000" data-aos-once="false">
+          <div>
+            <h1
+              class="text-4xl font-semibold text-[#02023E] mb-6 relative left-40"
+            >
+              Your Health Is Our Responsibility
+            </h1>
+          </div>
+          <div class="flex justify-end">
+            <p class="leading-8 w-5/6 font-semibold">
+              We understand the importance of timely and accessible healthcare.
+              That's why Mypatient is designed with you in mind, ensuring a
+              user-friendly and secure environment for all your healthcare
+              needs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+html{
+    scroll-behavior: smooth;
+}
+.ambulance img{
+    height: 30rem;
+    width: 100vmin;
+    
+}
+.square{
+    width: 100%;
+    margin-top: 63.9px;
+    font-weight: bolder;
+    
+    
+}
+button{
+    position: relative;
+    top: 5rem;
+    right: 30rem;
+    border-radius: 50px;
+    
+}
+.text{
+    font-style: italic;
+    font-size: 40px;
+    
+}

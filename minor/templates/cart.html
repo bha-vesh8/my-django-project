@@ -1,0 +1,160 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
+    <style>
+      #pay{
+        position: relative;
+        bottom: 53px;
+        left:10px
+      }
+
+      /* Spinner styles */
+      #loading-spinner {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+      }
+
+      #loading-spinner div {
+        width: 40px;
+        height: 40px;
+        margin: auto;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                "mycolor": "#0D6EFD",
+              },
+            },
+          },
+        };
+      </script>
+    <title>Cart</title>
+</head>
+{% load cart %}
+{% load custom_filter %}
+<body>
+    <div class="container">
+        <div class="border rounded p-4 m-4">
+            <p class="display-4 pl-4 ml-4">Your Cart</p>
+            <hr>
+            <table class = "table">
+                <thead>
+                    <tr>
+                        <th>Sno.</th>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for product in products %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><img style="height:80px" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price|currency}}</td>
+                        <td>{{product|cart_quantity:request.session.cart}}</td>
+                        <td>{{product|price_total:request.session.cart|currency}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <th colspan="3"></th>
+                        <th class="" colspan="2">Total</th>
+                        <th>{{products|total_cart_price:request.session.cart|currency}}</th>
+                    </tr>
+                </tfoot>
+            </table>
+           
+
+            <div class="m-3 p-3">
+                <a href="#"  data-bs-toggle="modal" data-bs-target="#exampleModal" class = "btn btn-dark border rounded col-lg-2 float-right bg-mycolor text-white" >Check out</a>
+                <a href="{% url 'order' %}"  class = "btn btn-dark border rounded  float-left bg-mycolor col-lg-2 text-white" >Back</a>
+            </div>
+        </div>
+    </div>
+
+<!-- modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fs-5" id="exampleModalLabel">Check out form</h5>
+          <button type="button" class="btn-close relative left-80" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="m-2 p-3">
+                <form action="/check-out" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="">Address</label>
+                      <input type="text" name="address" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                      
+                    </div>
+                    <div class="form-group">
+                        <label for="">Phone</label>
+                        <input type="text" name="phone" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                      </div>
+                
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-dark border text-white float-right bg-mycolor col-lg-5" value="Cash on delivery">
+        </div>
+
+        
+      </form>
+      
+      <form id="pay-form" action="{% url 'checkout_session' %}" method="POST">
+        {% csrf_token %}
+        {% for product in products %}
+        <input type="hidden" name="name" value="{{ product.name }}" class="hidden-input">
+        <input type="hidden" name="price" value="{{ product.price }}" class="hidden-input">
+        {% endfor %}
+        <input type="submit" id="pay" class="btn btn-dark border text-white bg-mycolor col-lg-5" value="Pay">
+    </form>
+      
+      </div>
+    </div>
+  </div>
+
+  <div id="loading-spinner">
+    <div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+  document.getElementById("pay-form").addEventListener("submit", function (e) {
+      // Show the loading spinner
+      document.getElementById("loading-spinner").style.display = "block";
+  });
+</script>
+</body>
+</html>

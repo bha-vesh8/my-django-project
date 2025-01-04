@@ -1,0 +1,16 @@
+          {% comment %} {% comment %} <!-- Popup -->
+           <div class=" popup hidden " id = "doctorModal">
+            <div class="popup_container">
+              <img id="modalImage" src="" alt="Doctor Image" class="w-32 h-32 rounded-full mb-4 ml-80">
+              <h2 id="modalName" class="text-2xl font-bold mb-2"></h2>
+              <p id="modalDescription" class ="text-center">{{ doctor.description}}</p>
+
+              <!-- Close Button -->
+              <button
+              class="absolute top-4 right-4 text-black text-xl font-bold"
+              onclick="closeModal()"
+            >
+              &times;
+            </button>
+            </div>
+           </div> {% endcomment %}

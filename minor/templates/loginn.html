@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
+    <script
+      src="https://kit.fontawesome.com/10bbbba2cb.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>login page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css'%}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-box">
+        <h1 id="title">Login</h1>
+        <form method="POST">
+          {% csrf_token %}
+
+          {% if error%}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+          {% endif %}
+
+
+          <div class="input-ground">
+            <div class="input-field" id="namefield">
+              <i class="fa-solid fa-user"></i>
+              <input
+                required
+                type="text"
+                name="username"
+                placeholder="Name"
+              />
+            </div>
+            <div class="input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input required type="email" name="email" placeholder="Email" />
+            </div>
+            <div class="input-field">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                required
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+            </div>
+            
+            <p id="forgot">Forgot Password ? <a href="#">Click Here</a></p>
+          </div>
+          <div class="btn">
+            <button type="submit" id="loginbtn">submit</button>
+            <a href="{% url "signup" %}" class="loginbtn"> <button> Signup</button></a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

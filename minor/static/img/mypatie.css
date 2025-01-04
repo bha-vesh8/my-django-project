@@ -1,0 +1,114 @@
+#backg{
+    background-repeat: no-repeat;
+    background-size: 1550px 755px;
+}
+
+#image{
+    position: relative;
+    left: 5rem;
+    bottom: 1rem;
+   
+ }
+
+ img{
+     border-radius: 5px;
+     box-shadow: 10px 10px 20px black;
+ }
+ section{
+     width: 100%;
+ }
+ .box{
+     position: relative;
+     top: 10rem;
+     left: 1rem;
+     height: 5.5rem;
+     box-shadow: 5px 5px 10px black;
+ }
+ .box1{
+     position: relative;
+     left: 6.7rem;
+     top: 40px;
+     height: 5.5rem;
+     width: 8.5rem;
+     box-shadow: 5px 5px 10px black;
+ }
+ 
+ html{
+     scroll-behavior: smooth;
+ }
+ 
+ .fa{
+     font-size:larger;
+ }
+ .boxes:hover .icon{
+     color: cyan;
+ }
+ #img{
+     position: relative;
+     bottom: 5%;
+     height: 90%;
+     width: 80%;
+ }
+ .group{
+     position: relative;
+     height: 300px;
+     width: 1000px;
+ }
+ .contact-left{
+     flex-basis: 35%;
+ }
+ .contact-right{
+     flex-basis: 60%;
+ }
+ .contact-left p{
+     margin-top: 30px;
+     color: var(--text-black-900);
+ }
+ 
+ .social-icons a{
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     margin: 0 10px;
+     text-decoration: none;
+     padding: 5px;
+     background: linear-gradient(130.08deg, #383528 0%, #191919 100%);
+     box-shadow: -2px 5px 5px #00000070;
+     border: 1px solid #3b3b3b;
+     color: white;
+     border-radius: 50px;
+     font-size: 20px;
+     transition: all 0.6s ease-in-out;
+     margin-top: 5%;
+     width: 40px;
+ }
+ .social-icons a:hover{
+     transform: translatey(-10px);
+ }
+ 
+ .insta:hover{
+     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);;
+ }
+ .whats:hover{
+     background: linear-gradient(130.08deg, green 100%, #191919 10%);
+ }
+ .contact-right form{
+     width: 100%;
+ }
+ form input, form textarea{
+     width: 100%;
+     border: 0;
+     outline: none;
+     background: #262626;
+     padding: 15px;
+     margin: 15px 0;
+     color: #fff;
+     font-size: 18px;
+     border-radius: 6px;
+ }
+ .main-content{
+    background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,10,10));
+ }
+ 
+ 
+ 

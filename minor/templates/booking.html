@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Ambulance</title>
+    <script src="{% static 'script.js' %}" defer></script>
+    <style>
+        /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+    color: #4CAF50;
+}
+
+label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+input, textarea, button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 2rem;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ambulance Booking Service</h1>
+    </header>
+
+    <main>
+        <section id="booking-form">
+            <h2>Book an Ambulance</h2>
+            <form id="ambulanceForm" method="post" action="{% url 'book_ambulance' %}">
+                {% csrf_token %}
+            
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" readonly required></textarea>
+            
+                <button type="button" id="getLocation">Start Real-Time Tracking</button>
+                <button type="button" id="stopTracking">Stop Tracking</button>
+            
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+            
+                <button type="submit">Book Now</button>
+            </form>
+            
+            
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Ambulance Booking Service</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let watchID;
+        
+            document.getElementById('getLocation').addEventListener('click', function () {
+                if (navigator.geolocation) {
+                    // Start tracking user's location
+                    watchID = navigator.geolocation.watchPosition(
+                        function (position) {
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
+        
+                            // Populate hidden fields
+                            document.getElementById('latitude').value = latitude;
+                            document.getElementById('longitude').value = longitude;
+        
+                            // Call OpenCage API for reverse geocoding
+                            const apiKey = '31610de934234eeb9740d5100eb7dfb5';
+                            const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`;
+        
+                            fetch(url)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.results && data.results[0]) {
+                                        const address = data.results[0].formatted;
+                                        // Update the address textarea
+                                        document.getElementById('address').value = address;
+                                        console.log('Real-time Address:', address);
+                                    } else {
+                                        console.warn('Unable to retrieve address.');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching address:', error);
+                                });
+                        },
+                        function (error) {
+                            switch (error.code) {
+                                case error.PERMISSION_DENIED:
+                                    alert('User denied the request for Geolocation.');
+                                    break;
+                                case error.POSITION_UNAVAILABLE:
+                                    alert('Location information is unavailable.');
+                                    break;
+                                case error.TIMEOUT:
+                                    alert('The request to get user location timed out.');
+                                    break;
+                                default:
+                                    alert('An unknown error occurred.');
+                                    break;
+                            }
+                        },
+                        {
+                            enableHighAccuracy: true, // Use GPS for precise location
+                            timeout: 10000,           // Wait up to 5 seconds for a location
+                            maximumAge: 0            // Do not use cached positions
+                        }
+                    );
+        
+                    alert('Real-time location tracking started.');
+                    console.log('Latitude:', latitude, 'Longitude:', longitude);
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                }
+            });
+        
+            // Optional: Add a stop button to stop tracking
+            document.getElementById('stopTracking').addEventListener('click', function () {
+                if (navigator.geolocation && watchID) {
+                    navigator.geolocation.clearWatch(watchID);
+                    alert('Real-time location tracking stopped.');
+                }
+            });
+        });
+        
+        
+        
+
+
+        
+        
+</script>
+</body>
+</html>

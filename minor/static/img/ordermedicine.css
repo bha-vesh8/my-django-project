@@ -1,0 +1,38 @@
+.search{
+    width: 450%;
+}
+.img{
+    position: relative;
+    left: 720px;
+}
+.fas{
+    position: relative;
+    left:900px;
+    font-size: 4.5vh;
+}
+p{
+    position: relative;
+    left: 910px;
+    font-size: x-large;
+}
+body{
+    background-color: skyblue;
+}
+.imge{
+    width: 60rem;
+}
+.divider {
+    height: 40px;
+    border-left: 1px solid gray;
+    position: absolute;
+    left: 5px;
+}
+.span{
+    color: blue;
+}
+.logo{
+    box-shadow: 0 10px 20px 10px;
+}
+button{
+    width: 14.5rem;
+}
