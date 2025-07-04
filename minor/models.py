@@ -14,6 +14,9 @@ class Customer(models.Model):
 
     def register(self):
         self.save()
+        
+    def __str__(self):
+        return self.first_name
 
     @staticmethod
     def get_customer_by_email(email):
@@ -45,6 +48,9 @@ class Product(models.Model):
     category = models.ForeignKey(Categories, related_name='products', on_delete=models.CASCADE, default=1)
     description = models.CharField(max_length=200, default='', null = True, blank=True)
     image = models.ImageField(upload_to='uploads/products/')
+    
+    def __str__(self):
+        return self.name
     
     @staticmethod
     def get_products_by_id(ids):
@@ -108,6 +114,9 @@ class Doctors(models.Model):
     address = models.CharField(max_length=50)
     description = models.CharField(max_length=1000, default='', null = True, blank=True)
     image = models.ImageField(upload_to='uploads/doctors/')
+    
+    def __str__(self):
+        return self.name
     
     @staticmethod
     def get_doctord_by_id(ids):

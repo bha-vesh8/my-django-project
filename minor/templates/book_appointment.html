@@ -145,7 +145,7 @@
   <div class="popup_container">
     <h2 id="docName" class="text-2xl font-bold mb-2"></h2>
     <button class="absolute top-4 right-4 text-black text-xl font-bold" onclick="closebtn()">&times;</button>
-    <form id="appointmentForm"  >
+    <form id="appointmentForm" method="POST" >
       {% csrf_token %}
       <input type="hidden" id="doctorId">
       <div class="mb-3">

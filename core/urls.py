@@ -15,19 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from minor.views import *
 from django.conf import settings
 from django.conf.urls.static import static
-
+admin.site.site_header = "Admin Panel"
+admin.site.site_title = "MyPatient"
+admin.site.index_title = "Dashboard"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('djadmin/', admin.site.urls),
+    path('admin/', admin_login, name = 'admin_login'),
+    path('dashboard', dashboard, name = 'dashboard'),
     path('signup', Signup.as_view(), name="signup"),
     path('loginn/', Login.as_view(), name="loginn"),
     path('', mypatient, name="mypatient"),
     path('', home, name="home"),
     path('logout/', logout, name="logout"),
+    path('adminlogout/', adminlogout, name="adminlogout"),
     path('ambulance/', ambulance, name='ambulance'),
     path('health/', health, name='health'),
     path('about/', about, name='about'), 
@@ -43,5 +48,13 @@ urlpatterns = [
     path('book', book_ambulance, name='book_ambulance'),
     path('book_appointment/', Index1.as_view(),name='book_appointment'),
     path('available-time-slots/<int:doctor_id>/<str:date>/', get_available_time_slots, name='available_time_slots'),
-    path('book-appointment/', book_appointment1, name='book_appointment'),
+    path('book-appointment/', book_appointment1, name='book-appointment'),
+    path('appointment/', appointment, name='adminappointment'),
+    path('adminuser/', adminusers, name='adminuser'),
+    path('adminbooking/', adminbooking, name='adminbooking'),
+    path('adminorder/', adminorder, name='adminorder'),
+    path('appointment/delete/<int:appointment_id>/',delete_appointment, name='delete_appointment'),
+    path('adminuser/delete/<int:user_id>/',delete_user, name='delete_user'),
+    path('adminbooking/delete/<int:book_id>/',delete_booking, name='delete_booking'),
+    path('adminorder/delete/<int:order_id>/',delete_order, name='delete_order'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

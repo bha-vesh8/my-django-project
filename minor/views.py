@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
-from django.contrib.auth import login as auth,logout
+from django.contrib.auth import authenticate,login 
 from minor.models import *
 from django.contrib.auth.hashers import make_password , check_password
 from django.views import View
@@ -13,7 +13,8 @@ from django.db.models import Q
 from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-import json
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 @login_required
 @csrf_exempt  # Ensure CSRF middleware works
@@ -181,6 +182,10 @@ def logout(request):
     request.session.clear()
     return redirect('loginn')
 
+def adminlogout(request):
+    request.session.clear()
+    return redirect('admin_login')
+
 def mypatient (request):
     print('you are :', request.session.get('username'))
     print('your email is :', request.session.get('email'))
@@ -208,7 +213,7 @@ class Index(View):
         remove = request.POST.get('remove')
         cart = request.session.get('cart')
         if cart:
-            quantity = cart.get(product)
+            quantity = cart.get(product) 
             if quantity:
                 if remove:
                     if quantity<=1:
@@ -281,7 +286,6 @@ class CheckOut(View):
         return redirect('cart')
     
 stripe.api_key = settings.STRIPE_API_KEY
-
     
 def checkout_session(request):
     # Get cart from session (example: {product_id: quantity})
@@ -418,7 +422,75 @@ class Index1(View):
         'all_doctors': all_doctors
      }
      return render(request,'book_appointment.html', context)
+ 
+def admin_login(request):
+    try:
+        if request.user.is_authenticated:
+            return redirect('/dashboard')
+        
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            
+            user_obj = User.objects.filter(username=username)
+            if not user_obj.exists():
+                messages.info(request, 'Account found')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            
+            user_obj = authenticate(username=username, password = password)
+            if user_obj is None:
+                messages.info(request, 'Invalid password')
+                return redirect('/')
+            
+            if not user_obj.is_superuser:
+                messages.info(request, 'You do not have admin privileges')
+                return redirect('/')
+            
+            login(request, user_obj)
+            return redirect('/dashboard')
+        
+        return render(request, 'adminlogin.html')
+    
+    except Exception as e:
+        print(e)
+        messages.error(request, 'An error occurred. Please try again.')
+        return redirect('/')
+    
+def dashboard(request):
+    return render(request, 'dashboard.html')
 
+def appointment(request):
+    objs = Appointment.objects.all()
+    return render(request, 'adminappointment.html', {'objs' : objs})
 
+def delete_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    appointment.delete()
+    return redirect('adminappointment') 
 
+def delete_user(request, user_id):
+    user = get_object_or_404(Customer, id=user_id)
+    user.delete()
+    return redirect('adminuser') 
 
+def delete_booking(request, book_id):
+    book = get_object_or_404(Booking, id=book_id)
+    book.delete()
+    return redirect('adminbooking') 
+
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.delete()
+    return redirect('adminorder') 
+
+def adminusers(request):
+    objs1 = Customer.objects.all()
+    return render(request, 'adminusers.html', {'objs1' : objs1})
+
+def adminbooking(request):
+    objs2 = Booking.objects.all()
+    return render(request, 'adminbooking.html', {'objs2' : objs2})
+
+def adminorder(request):
+    objs3 = Order.objects.all()
+    return render(request, 'adminorder.html', {'objs3' : objs3})
