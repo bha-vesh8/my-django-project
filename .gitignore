@@ -1,0 +1,7 @@
+# Don't include local settings or compiled files
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Ignore collected static files (will be generated at build time)
+staticfiles/

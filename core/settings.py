@@ -120,19 +120,27 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = ""
-MEDIA_ROOT = BASE_DIR
+# For collectstatic (used by Render)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIR = [BASE_DIR, "static"]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'minor', 'static'),  # Your custom static folder
+]
+
+# Media files (uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+# Deployment settings
+DEBUG = False  # Required for production on Render
+ALLOWED_HOSTS = ['*']  # You can add your Render URL here instead of '*'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Stripe secret key (keep this in .env for real use)
 STRIPE_API_KEY = 'sk_test_51QXgN0SGnvY4YFW3GfMCzqqMR5mXhcpNuUrrsazjQ3siMfeYftMmYotQHKgZuQsrNhaDa0xAzcr9dYrFRxzRhiHp00vCItuY4k'
