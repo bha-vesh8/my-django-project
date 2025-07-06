@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-*n)nuct8xa*n308(p2m%7)^z054jlq)0o!_z4(!c9@0i@=e2je'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,6 +50,7 @@ INSTALLED_APPS += EXTERNAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -133,7 +134,7 @@ STATICFILES_DIRS = [
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Deployment settings
 DEBUG = False  # Required for production on Render
