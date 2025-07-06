@@ -134,7 +134,7 @@ STATICFILES_DIRS = [
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # Deployment settings
 DEBUG = False  # Required for production on Render
