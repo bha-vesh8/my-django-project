@@ -25,8 +25,8 @@ admin.site.index_title = "Dashboard"
 
 urlpatterns = [
     path('djadmin/', admin.site.urls),
-    path('admin/', admin_login, name = 'admin_login'),
-    path('dashboard', dashboard, name = 'dashboard'),
+    path('admin/', admin_login, name='admin_login'),
+    path('dashboard', dashboard, name='dashboard'),
     path('signup', Signup.as_view(), name="signup"),
     path('loginn/', Login.as_view(), name="loginn"),
     path('', mypatient, name="mypatient"),
@@ -35,7 +35,7 @@ urlpatterns = [
     path('adminlogout/', adminlogout, name="adminlogout"),
     path('ambulance/', ambulance, name='ambulance'),
     path('health/', health, name='health'),
-    path('about/', about, name='about'), 
+    path('about/', about, name='about'),
     path('order/', Index.as_view(), name='order'),
     path('search', search, name='search'),
     path('doctorsearch', d_search, name='d_search'),
@@ -46,15 +46,25 @@ urlpatterns = [
     path('cancel', cancel, name='cancel'),
     path('orders', Orders.as_view(), name='Orders'),
     path('book', book_ambulance, name='book_ambulance'),
-    path('book_appointment/', Index1.as_view(),name='book_appointment'),
-    path('available-time-slots/<int:doctor_id>/<str:date>/', get_available_time_slots, name='available_time_slots'),
+    path('book_appointment/', Index1.as_view(), name='book_appointment'),
+    path('available-time-slots/<int:doctor_id>/<str:date>/',
+         get_available_time_slots, name='available_time_slots'),
     path('book-appointment/', book_appointment1, name='book-appointment'),
     path('appointment/', appointment, name='adminappointment'),
     path('adminuser/', adminusers, name='adminuser'),
     path('adminbooking/', adminbooking, name='adminbooking'),
     path('adminorder/', adminorder, name='adminorder'),
-    path('appointment/delete/<int:appointment_id>/',delete_appointment, name='delete_appointment'),
-    path('adminuser/delete/<int:user_id>/',delete_user, name='delete_user'),
-    path('adminbooking/delete/<int:book_id>/',delete_booking, name='delete_booking'),
-    path('adminorder/delete/<int:order_id>/',delete_order, name='delete_order'),
+    path('appointment/delete/<int:appointment_id>/',
+         delete_appointment, name='delete_appointment'),
+    path('adminuser/delete/<int:user_id>/', delete_user, name='delete_user'),
+    path('adminbooking/delete/<int:book_id>/',
+         delete_booking, name='delete_booking'),
+    path('adminorder/delete/<int:order_id>/',
+         delete_order, name='delete_order'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
